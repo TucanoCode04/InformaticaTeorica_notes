@@ -44,3 +44,40 @@ Addizione unaria: $\sqcup 1 1 1 + 1 1 1 \sqcup$
 
 ### Espressività delle Macchine di Turing
 #### Problemi di decisione
+Input: dati del tipo corretto
+Output: si o no
+Una macchina di Turing calcola funzioni del tipo $\mathbb{N}^k \rightarrow \mathbb{N}$.
+Per rappresentare un problema di decisione basta codificare il problema come la funzione caratteristica di un linguaggio formale.
+
+*Linguaggio formale:* dato un insieme finito $\Sigma$ di simboli, un linguaggio formale su $\Sigma$ è un sottoinsieme di $\Sigma^*$.
+*Esempio:* $\Sigma = \{1\}$, $L = \{\epsilon, 1, 11, 111, ...\}$
+La funzione caratteristica di un linguaggio formale è la funzione $\chi_L(x): \Sigma^* \rightarrow \{0, 1\}$ definita come:
+$\chi_L(x) = \begin{cases} 1 & \text{se } x \in L \\ 0 & \text{se } x \notin L \end{cases}$
+
+**Da un problema di decisione a un linguaggio formale**
+Il linguaggio formale associato a un problema di decisione è: $L = \{x \in \Sigma^* | x = code(\alpha)\}$ dove code codifica il dato di input $\alpha$.
+Code deve rispettare le seguenti proprietà:
+- se $\alpha \neq \beta$ allora $code(\alpha) \neq code(\beta)$
+- dovremmo poter verificare se $x \in \Sigma^*$ è code($\alpha$) per qualche $\alpha$.
+- dovremmo poter recuperare $\alpha$ da code($\alpha$).
+
+**Linguaggi decidibili**
+Come ragionare su un problema di decisione usando una macchina di Turing.
+- la codifica del problema di decisione come L su un alfabeto $\Sigma'$.
+- vogliamo una macchina di Turing $\mathcal{M}$ con le seguenti proprietà:
+    - l'alfabeto di input/output $\Sigma_{l}$ è $\Sigma'$
+    - l'insieme degli stati finali $H$ è $\{Y, N\}$
+- $\mathcal{M}$ *accetta* un input $x \in \Sigma_{l}^*$ se la computazione termina nello stato $Y$. *Rigetta* l'input se la computazione termina nello stato $N$.
+- $\mathcal{M}$ *decide* L se:
+    - $x \in L$, allora $\mathcal{M}$ accetta $x$
+    - $x \notin L$, allora $\mathcal{M}$ rigetta $x$
+Un linguaggio(o problema) è decidibile se esiste una macchina di Turing che decide il linguaggio.
+
+**Linguaggi riconoscibili**
+Ulteriore modo per ragionare su un problema di decisione usando una macchina di Turing.
+- la codifica del problema di decisione come L su un alfabeto $\Sigma'$.
+- alfabeto di input/output $\Sigma'$
+- $\mathcal{M}$ *riconosce* L se:
+    - $x \in L$, allora $\mathcal{M}$ si ferma(raggiunge uno stato finale)
+    - $x \notin L$, allora $\mathcal{M}$ non si ferma(enrtra in un loop)
+Un linguaggio(o problema) è riconoscibile se esiste una macchina di Turing che riconosce il linguaggio.
