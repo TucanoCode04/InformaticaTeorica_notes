@@ -61,6 +61,29 @@ Da qui possiamo esprimere il contenuto del nastro come un numero naturale in bas
 #### Linguaggio di programmazione WHILE
 Abbiamo dimostrato che una TM simula qualunque cosa a basso livello, adesso cerchiamo di dimostrare che anche un linguaggio ad altro livello non ha più potere espressivo. Mostriamo che un linguaggio di programmazione molto semplice, WHILE, è equivalente alle TM, e viceversa.
 
+*Sintassi informale di WHILE:*
+- $x := e$: assegnamento
+- $while x \neq 0 do PROGRAM$: ciclo
+- $PROGRAM_1; PROGRAM_2$: sequenzialità
+- tutto il resto può essere definito in termini di queste 3 istruzioni.
+
+*Semantica informale di WHILE:*
+Un programma WHILE computa una funzione parziale $\mathbb{N}^k \rightarrow \mathbb{N}^k$.
+
+**Teorema:**
+Una funzione parziale è computabile da un programma WHILE se e solo se è calcolabile da una TM.
+
+**Dimostrazione:**
+Dimostriamo per induzione su un programma WHILE basato su variabili $x_1, x_2, ...$.
+
+*Caso base:*
+Se il programma è un'assegnazione di 0 ad una variabile, la TM corrispondente rimpiazza il valore della variabile con 0(le variabili sono scritte in notazione unaria una di seuguito all'altra sul nastro).
+Programma vuoto e assegnamento di una variabile ad un'altra sono casi simili.
+
+*Caso induttivo:*
+- sequenzialità: avendo un programma $P_1; P_2$, avremo $\mathcal{M}_1$ e $\mathcal{M}_2$ TM corrispondenti. Concateniamo le TM in modo che $\mathcal{M}_1$ scriva l'output su un nastro e $\mathcal{M}_2$ legga l'input da un nastro.
+- ciclo: avendo un programma $while x_i \neq x_j do P$, avremo $\mathcal{M}$ TM corrispondente. Possiamo costruire una TM $\mathcal{M}_{test}$ che rigetta l'input se $x_i \neq x_j$, altrimenti accetta. 
+L'input verrà scritto su $\mathcal{M}_{test}$, se rigetta passiamo a $\mathcal{M}$ che torna all'inizio del ciclo, altrimenti termina.
 
 
 
