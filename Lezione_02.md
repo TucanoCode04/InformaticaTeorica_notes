@@ -71,6 +71,7 @@ Come ragionare su un problema di decisione usando una macchina di Turing.
 - $\mathcal{M}$ *decide* L se:
     - $x \in L$, allora $\mathcal{M}$ accetta $x$
     - $x \notin L$, allora $\mathcal{M}$ rigetta $x$
+
 Un linguaggio(o problema) è decidibile se esiste una macchina di Turing che decide il linguaggio.
 
 **Linguaggi riconoscibili**
@@ -80,4 +81,5 @@ Ulteriore modo per ragionare su un problema di decisione usando una macchina di 
 - $\mathcal{M}$ *riconosce* L se:
     - $x \in L$, allora $\mathcal{M}$ si ferma(raggiunge uno stato finale)
     - $x \notin L$, allora $\mathcal{M}$ non si ferma(enrtra in un loop)
+    
 Un linguaggio(o problema) è riconoscibile se esiste una macchina di Turing che riconosce il linguaggio.

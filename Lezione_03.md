@@ -13,7 +13,7 @@ L'input viene letto dal primo nastro, gli altri nastir inizialmente vuoti.
 Ad ogni passo di computazione, ogni testina è nello stesso stato, ma può essere in posizioni diverse e leggere simboli o compiere azioni diverse.
 Se si raggiunge uno stato finale, l'output si legge dal primo nastro.
 *Formalmente:* Una macchina di Turing con k nastri è una tupla $(\Sigma, Q, q_0, H, \delta)$ dove:
-- $\delta: Q \backslash H \times \Sigma^k \rightarrow Q \times \( \Sigma \times \{\rightarrow, \leftarrow, -\} \)^k$ è la funzione di transizione
+- $\delta: Q \backslash H \times \Sigma^k \rightarrow Q \times ( \Sigma \times \{\rightarrow, \leftarrow, -\} )^k$ è la funzione di transizione
 *Esempio:*
 Una macchina di Turing con 2 nastri che verifica se una stringa è palindroma.
 - il primo nastro contiene la stringa
