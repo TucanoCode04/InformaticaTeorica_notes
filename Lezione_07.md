@@ -111,3 +111,48 @@ $EQ$ è non riconoscibile.
 Se $L$ è un qualunque linguaggio non triviale($L \neq \emptyset, \Sigma^*$), allora $L' \leq L$ per ogni linguaggio $L'$ decidibile.
 
 **Dimostrazione:**
+Poichè $L$ è non triviale, esiste una stringa $x \in L$ e una stringa $y \notin L$.
+- Definiamo $f : \Sigma^* \rightarrow \Sigma^*$ come segue:
+    - $f(z) = x$ se $z \in L'$
+    - $f(z) = y$ se $z \notin L'$
+- Essendo $L'$ decidibile, possiamo implementare $f$ con una TM che simula la TM che decide $L'$ e restituisce $x$ o $y$ a seconda del risultato.
+- Inoltre per definizione di $f$, $z \in L' \Leftrightarrow f(z) \in L$.
+
+**Proprietà:**
+- Riflessività: per ogni linguaggio $L$, $L \leq L$.
+- Transitività: se $L' \leq L$ e $L \leq L''$, allora $L' \leq L''$.
+- Non simmetria: se $L' \leq L$ e $L$ è decidibile, non è detto che $L \leq L'$.
+
+Quindi la Riduzione non è una relazione di equivalenza.
+
+**Teorema:**
+$L_1 \leq L_2$ se e solo se $L_1^- \leq L_2^-$.
+
+**Dimostrazione:**
+- $\Rightarrow$: se $L_1 \leq L_2$, allora esiste una funzione $f$ tale che $x \in L_1 \Leftrightarrow f(x) \in L_2$. Quindi $x \in L_1^- \Leftrightarrow f(x) \in L_2^-$. Quindi $L_1^- \leq L_2^-$.
+- $\Leftarrow$: se $L_1^- \leq L_2^-$, allora esiste una funzione $f$ tale che $x \in L_1^- \Leftrightarrow f(x) \in L_2^-$. Quindi $x \in L_1 \Leftrightarrow f(x) \in L_2$. Quindi $L_1 \leq L_2$.
+
+**Corollario:**
+$L_1^- \leq L_2$ se e solo se $L_1 \leq L_2^-$(Usato implicitamente nella prova con $L_1 = HALT$ e $L_2 = EQ$).
+
+**Conclusioni:**
+Sappiamo quindi che $EQ^-$ è non riconoscibile. Infatti $HALT \leq FL \leq EQ$, quindi $HALT^- \leq EQ^-$(la non riconoscibilità di $HALT^-$ implica la non riconoscibilità di $EQ^-$).
+
+**Gerarchia:**
+- $HALT$ è indecidibile, ma riconoscibile.
+- $HALT^-$ è non riconoscibile, ma il cui complemento è riconoscibile.
+- $EQ$ è non riconoscibile, e il cui complemento è non decidibile.
+
+### Turing-riducibilità
+*Oracolo:* Strumento esterno per un linguaggio capace di risponde, per ogni stringa $x$, se $x \in L$ o $x \notin L$.
+
+**Definizione:**
+Un linguaggio $L'$ è Turing-riducibile a un linguaggio $L$ se esiste un oracolo per $L$ possiamo decidere $L'$.
+
+**Confronto con la mapping-reduction:**
+La mapping-reduction implica la Turing-reduction, ma non viceversa.
+
+**Esempio:**
+- $HALT^- \nleq HALT$($HALT^-$ non è mapping-riducibile a $HALT$).
+- $HALT^-$ è Turing-riducibile a $HALT$, infatti se abbiamo un oracolo per la domanda "$\langle y, x \rangle \in HALT$?" può essere usato per decidere $\langle y, x \rangle \in HALT^-$.
+
