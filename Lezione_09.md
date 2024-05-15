@@ -34,6 +34,8 @@ Il Tiling, assumendo un quadrato positivo diviso in celle con delle coordinate, 
 2.  $(f(n, m), f(n+1, m)) \in H$ per ogni $n, m \in \mathbb{N}$
 3.  $(f(n, m), f(n, m+1)) \in V$ per ogni $n, m \in \mathbb{N}$
 
+![Tiling](image-4.png)
+
 **Dimostrazione:**
 Riduciamo il Tiling problem a $ETH^-$, implicando che esso non sia riconoscibile da nessuna TM.
 
@@ -43,4 +45,35 @@ Due passi:
 
 2.  Questa trasformazione è fatta in modo tale per cui $code(\mathcal{M}) \in ETH \Leftrightarrow \text { non eiste un tiling per } \mathcal{T_{\mathcal{M}}}$. Tale corrisponde riduce $ETH$ al complemento del tiling problem, così che $ETH^-$ si riduce al tiling problem.
 
+*Traduzione di regole di adiacenza e piastrelle:* $\newline$
+Per convenzione segnamo i margini delle piastrelle con delle lettere, solo i margini con le stesse lettere possono essere accoppiate
 
+*Da una TM $\mathcal{M}$ a un sistema di tiling $\mathcal{T_{\mathcal{M}}}$:* $\newline$
+- L'idea è che le file successive del Tiling rappresentano i passi della computazione della TM. Piastrelle speciali sono usate per rappresentare lo stato corrente della TM e posizione della testina.
+- Definiamo la piastrella d'origine $t_0$.
+$\newline$
+![Piastrella Inziale](image-5.png)
+- Definiamo la piastrella che rappresenta il vuoto.
+$\newline$
+![Vuoto](image-6.png)
+- Per ogni simbolo $\sigma \in \Sigma$ includiamo una piastrella che lo rappresenta.
+$\newline$
+![Simboli](image-7.png)
+- Per ogni $q \in Q\backslash \{ h \}$ e $\sigma, \sigma' \in \Sigma$ per cui $\delta(q, \sigma) = (q', \sigma', \rightarrow)$, includiamo una piastrella, e per ogni $\sigma'' \in \Sigma$.
+$\newline$
+![Transizioni](image-8.png)
+
+*Esempio di Tiling:* $\newline$
+Questo Tiling rappresenta la computazione della TM $\mathcal{M}$ su un input $\epsilon$.
+$\newline$
+![Tiling](image-9.png)
+
+*Il Tiling problem è irriconoscibile:* $\newline$
+- Supponiamo che esista una TM $\mathcal{M}$ che si fermi su input $\epsilon$.
+- Il tiling inizierà con una prima fila di piastrelle che rappresentano lo stato iniziale della TM.
+- Ogni passo successivo $i$ della computazione è rappresentato dalla fila $i$ del tiling.
+- Se la TM si ferma, non esiste un Tiling che rappresenta la computazione della TM, perchè non esiste una fila $n + 1$ che rappresenta il prossimo passo della computazione.
+- Se la TM non si ferma, il Tiling non terminerà mai.
+- Quindi, il tiling problem è irriconoscibile.
+
+## OGNI PROBLEMA DI EQUIVALENZA CON UNA TM È INDECIDIBILE
