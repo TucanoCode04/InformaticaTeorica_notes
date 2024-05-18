@@ -103,3 +103,54 @@ Se $SAT \in P$ allora $P = NP$
 **Dimostrazione:**
 Dimostrare che $SAT \in NP$ è facile, poichè data una formula $F$ possiamo costruire una TM non deterministica che verifica se un assegnamento di valori di verità rende vera $F$ in tempo polinomiale.
 
+Rimane da dimostrare che ogni linguaggio in $NP$ è poly riducibile a $SAT$.
+
+Supponi che M sia la TM non deterministica che decide $L$. Dobbiamo tradurre una stringa $w$ in una formula $F_w$ tale che assegnamenti di valore $A$ a $F_w$ corrispondono a computazioni di $M$ su $w$. Quindi $A$ rende vera $F_w$ se e solo se $M$ accetta $w$.
+
+*Dimostrazione:*
+- Supponiamo che $M = \langle \Sigma, Q, q_0, \delta, \{Y, N\} \rangle$ decida $L$ in tempo $n^k$, per qualche $k$ costante.
+- Definiamo un *tableau* per $M$ come una tabella $n^k \times n^k$, dove ogni riga corrisponde ad una configurazione di $M$ in un passo della computazione su $w$ e ogni colonna corrisponde ad un passo della computazione.
+![Tableau](image-11.png)
+
+Stabilire se $M$ accetta $w$ è equivalente a stabilire se esiste un tableau accettante per $M$ su $w$.
+
+- Definiamo $F_w = F_{cell} \land F_{start} \land F_{move} \land F_{accept}$
+- L'insieme di variabili di $F_w$ è $\{x_{i, j, s}\ |\ (i, j) \in [n^k] \times [n^k], s \in Q \cup \Sigma \cup \{\#\}\}$, vogliamo assegnare 1(vero) a $x_{i, j, s}$ se la cella $(i, j)$ contiene il simbolo $s$.
+    - $F_{cell}$: dobbiamo assegnare 1 a esattamente un $x_{i, j, s}$ per ogni $(i, j)$ e $s$(ovvero bisogna rendere vera una variabile per ogni cella del tableau)
+    - $F_{start}$: la prima riga corrisponde a una configurazione iniziale di $M$ su $w$
+    - $F_{move}$: i simboli nelle celle devono descrivere una computazione legale di $M$ su $w$ che rispetti la funzione di transizione $\delta$
+    - $F_{accept}$: almeno una delle configurazioni(righe) nel tableau è accettante(Y)
+
+La computazione di una TM è locale, quindi è sufficiente esprimere una condizione che riguardi le *finestre* (di dimensione $2 \times 3$) del tableau.
+$$F_{cell} = \bigwedge_{1 \leq i, j \leq n^k} [\bigvee_{s \in C} x_{i, j, s}\land \bigwedge_{s, t \in C, s \neq t} (\neg x_{i, j, s} \lor \neg x_{i, j, t})]$$
+$$F_{start} = x_{1, 1, \#} \land x_{1, 2, q_0} \land x_{1, 3, w_1} \land ... \land x_{1, n^{k-1}, \sqcup} \land x_{1, n^k, \#}$$
+$$F_{move} = \bigwedge_{1 \leq i \leq n^k, 1 \leq j \leq n^k} (\bigvee_{a_1, ..., a_6 \text{ è una finestra ammessa}} x_{i, j - 1, a_1} \land x_{i, j, a_2} \land x_{i, j + 1, a_3} \land x_{i + 1, j - 1, a_4} \land x_{i + 1, j, a_5} \land x_{i + 1, j + 1, a_6})$$
+$$F_{accept} = \bigvee_{1 \leq i, j \leq n^k} x_{i, j, Y}$$
+
+$F_w$ è soddisfacibile $\Leftrightarrow$ esiste un tableau accettante $\Leftrightarrow$ $M$ accetta $w$
+
+Abbiamo dimostrato che:
+- $F_w$ è soddisfacibile $\Leftrightarrow$ esiste un tableau accettante
+
+Dobbiamo dimostrare che:
+- La costruzione di $F_w$ richiede tempo polinomiale rispetto a $w$
+
+- Il tableau ha dimensione $n^k \times n^k$, quindi contiene $n^{2k}$ celle, dove ogni cella contiene uno tra $m = |Q| + |\Sigma| + 1$ simboli. Quindi il numero di variabili in $F_w$ è $n^{2k} \cdot m = O(n^{2k})$.
+- $F_{cell}$ contiene una sottoformula(si intende la formula sopra per calcolarlo) di lunghezza costante per ogni cella, quindi richiede $O(n^{2k})$.
+- $F_{start}$ contiene una sottoformula di lunghezza costante per ogni cella, quindi richiede $O(n^{k})$.
+- Sia $F_{move}$ che $F_{accept}$ contengono una sottoformula di lunghezza costante per ogni cella, quindi richiedono $O(n^{2k})$.
+- Quindi la costruzione di $F_w$ richiede tempo polinomiale rispetto a $w$.
+
+#### Altri problemi $NP-completi$
+**Teorema:**
+$3SAT$ è $NP-completo$
+
+**Corollario:**
+$CLIQUE$ è $NP-completo$
+
+*Altri esempi:*
+- problema del commesso viaggiatore
+- colorare un grafo con k colori
+- vincere a battaglia navale
+- fare mining di bitcoin in tempo polinomiale
+- serializzabilità della cronologia di un database
