@@ -35,8 +35,11 @@ Per contraddizione. DImostriamo che se "$\mathcal{M}$ ha proprietà P" fosse dec
     - simula $\mathcal{M}$ su $x$
     - se $\mathcal{M}$ ferma, simula $\mathcal{M_{\mathcal{P}}}$ su $z$, altrimenti entra in un loop
     - se $\mathcal{M_{\mathcal{P}}}$ ferma, accetta, altrimenti entra in un loop
-- $\mathcal{M}$ ferma su $x$ $\Rightarrow$ $\mathcal{M_{\mathcal{M}, x}}$ ferma su $z$ ogni volta che $\mathcal{M_{\mathcal{P}}}$ ferma su $z$ $\Rightarrow$ $L_{\mathcal{P}} = L_{\mathcal{M_{\mathcal{M}, x}}}$ \Rightarrow P($\mathcal{M_{\mathcal{M}, x}}$) = P($\mathcal{M_{\mathcal{P}}}$) = 1, cioè $\mathcal{M_{\mathcal{M}, x}}$ ha la proprietà P.
-- $\mathcal{M}$ non ferma su $x$ $\Rightarrow$ $\mathcal{M_{\mathcal{M}, x}}$ non ferma mai su $z$ $\Rightarrow$ $L_{\mathcal{M_{\mathcal{M}, x}}} = \emptyset$ \Rightarrow P($\mathcal{M_{\mathcal{M}, x}}$) = P($\mathcal{M_{\emptyset}}$) = 0, cioè $\mathcal{M_{\mathcal{M}, x}}$ non ha la proprietà P.
+- $\mathcal{M}$ ferma su $x$ $\Rightarrow$ $\mathcal{M_{\mathcal{M}, x}}$ ferma su $z$ ogni volta che $\mathcal{M_{\mathcal{P}}}$ ferma su $z$ $\Rightarrow$ $L_{\mathcal{P}} = L_{\mathcal{M_{\mathcal{M}, x}}}$ $\Rightarrow$ P($\mathcal{M_{\mathcal{M}, x}}$) = P($\mathcal{M_{\mathcal{P}}}$) = 1, cioè $\mathcal{M_{\mathcal{M}, x}}$ ha la proprietà P.
+- $\mathcal{M}$ non ferma su $x$ $\Rightarrow$ $\mathcal{M_{\mathcal{M}, x}}$ non ferma mai su $z$ $\Rightarrow$ $L_{\mathcal{M_{\mathcal{M}, x}}} = \emptyset$ $\Rightarrow$ P($\mathcal{M_{\mathcal{M}, x}}$) = P($\mathcal{M_{\emptyset}}$) = 0, cioè $\mathcal{M_{\mathcal{M}, x}}$ non ha la proprietà P.
+
+(In pratica si costruisce una TM $\mathcal{M_{\mathcal{M}, x}}$ che ferma su input $z$ se $\mathcal{M_{\mathcal{P}}}$ ferma su $z$, quindi entrambe le TM hanno la stessa proprietà P, tutto questo ovviamente se $\mathcal{M}$ ferma su $x$)
+(Il problema è che stiamo decidendo in questo modo il problema della fermata, che sappiamo essere indecidibile, quindi c'è una contraddizione)
 
 Conclusione: se potessimo decidere se $\mathcal{M}$ ha la proprietà P, potremmo decidere il problema della fermata. Allora $\{ y | y = code(\mathcal{M}) \text{ e } P(\mathcal{M}) = 1 \}$ è indecidibile.
 
@@ -48,9 +51,23 @@ Se assumiamo invece che $P(\mathcal{M_{\emptyset}} = 1)$. Si può utilizzare lo 
 Conclusione: $\{ y | y = code(\mathcal{M}) \text{ e } \lnot P(\mathcal{M}) = 1 \}$ è indecidibile, quindi anche $\{ y | y = code(\mathcal{M}) \text{ e } P(\mathcal{M}) = 1\}$ è indecidibile.
 
 **Tipi di proprietà:**
-- proprietà di linguaggio: quelle non triviali sono indecidibili.
-- proprietà strutturali: per esempio: "$\mathcal{M}$ ha 13 stati". Sono decibili poichè verificate staticamente sulla codifica della descrizione di TM.
-- proprietà algoritmiche: per esempio"$\mathcal{M}$ non si muove a sinistra su input 0101". La classificazione non è ovvia.
+- proprietà di linguaggio: queste proprietà si riferiscono al linguaggio che una TM accetta. Quelle non triviali sono indecidibili.
+    - Esempi:
+        - il linguaggio accettao è...
+        - problema della fermata(se una TM si ferma su un input)
+        - problema dell'equivalenza(se due TM accettano lo stesso linguaggio)
+        - problema dell'universalità(se una TM accetta tutti i possibili input)
+- proprietà strutturali: Quest proprietà si riferiscono alla struttura della TM stessa. Sono decibili poichè verificate staticamente sulla codifica della descrizione di TM.
+    - Esempi:
+        - numero di stati(determinare il numero di stati di una TM)
+        - numero di simboli(determinare il numero di simboli di una TM)
+        - numero di transizioni(determinare il numero di transizioni di una TM)
+- proprietà algoritmiche: Quest proprietà si riferiscono al comportamento operativo di una TM su un certo input. La classificazione non è ovvia.
+    - Esempi:
+        - movimento(una TM si muove a sinistra su un input)
+        - loop infiniti(una TM entra in un loop infinito su un input)
+
+(Da capire meglio cosa intendono le proprietà)
 
 ### Cardinalità dei problemi irrisolvibili
 Dimostriamo che la maggior parte dei linguaggi non sono riconoscibili, e quindi non decidibili.
@@ -70,6 +87,7 @@ Se $S_1$ e $S_2$ sono infinitamente numerabili, $S_1 \cup S_2$ è infinito numer
 Cantor proponr una tenica di *diagonalzzaizone* per mostrare che i numeri reali($\mathbb{R}$) non sono un infinito numerabile, è un infinito più grande di quello dei numeri naturali($\mathbb{N}$).
 
 **L'insieme dei linguaggi è non numerabile**
+
 **Teorema:**
 L'insieme $S_{\Sigma}$ di tutti i linguaggi su un alfabeto $\Sigma$ è non numerabile.
 

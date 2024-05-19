@@ -9,12 +9,12 @@ Una macchina di Turing universale è una macchina di Turing che può prendere in
 
 **Definizione:**
 - La UTM prende una stringa $y$ in input.
-- Verifica che $y$ sia della forma $code(\mathcal{M}), code(x)$, dove $code(-)$ è una codifica, $\mathcal{M}$ è una TM e $x$ è una stringa dell'alfabeto $\Sigma_l$ di $\mathcal{M}$.
+- Verifica che $y$ sia della forma $(code(\mathcal{M}), code(x))$, dove $code(-)$ è una codifica, $\mathcal{M}$ è una TM e $x$ è una stringa dell'alfabeto $\Sigma_l$ di $\mathcal{M}$.
 - La UTM simula la TM $\mathcal{M}$ con input $x$.
 
 Si ferma se $\mathcal{M}$ si ferma con input $x$, con output $code(z)$, altrimenti non si ferma.
 
-*Simulare significa che su input $y=code(\mathcal{M}), code(x)$, la UTM dà lo stesso output di $\mathcal{M}$ su input $x$.*
+*Simulare significa che su input $y=(code(\mathcal{M}), code(x))$, la UTM dà lo stesso output di $\mathcal{M}$ su input $x$.*
 
 **Teorema:**
 Esiste una macchina di Turing universale.
@@ -43,7 +43,7 @@ Convenzioni:
 
 **Costruzione della UTM:**
 *Promemoria:*
-Eseguire la UTM su input $y = code(\mathcal{M}), code(x)$ dovrebbe restituire lo stesso output di $\mathcal{M}$ su input $x$.
+Eseguire la UTM su input $y = (code(\mathcal{M}), code(x))$ dovrebbe restituire lo stesso output di $\mathcal{M}$ su input $x$.
 - UTM non ferma su input $y$ se e solo se $\mathcal{M}$ non ferma su input $x$.
 - UTM ferma su input $y$ con output $code(z)$ se e solo se $\mathcal{M}$ ferma su input $x$ con output $z$.
 
@@ -54,7 +54,7 @@ La UTM è una macchina di Turing con 3 nastri:
 - il terzo nastro manterrà lo stato corrente di $\mathcal{M}$ in forma codificata.
 
 Simulazione della UTM:
-- passo di preparazione: verifica $y = code(\mathcal{M}), code(x)$ per qualche TM $\mathcal{M}$ e input $x$. Se no, ciclo infinito. Se sì, allora il nastro 1 contiene $code(\mathcal{M}), code(x)$(la codifica della macchina e l'input).
+- passo di preparazione: verifica $y = (code(\mathcal{M}), code(x))$ per qualche TM $\mathcal{M}$ e input $x$. Se no, ciclo infinito. Se sì, allora il nastro 1 contiene $(code(\mathcal{M}), code(x))$(la codifica della macchina e l'input).
 - sposta $code(\mathcal{M})$ sul nastro 2. Adesso il nastro 1 mostra il contenuto del nastro di $\mathcal{M}$ su input $x$ alla configurazione iniziale, in forma codificata.
 - scrivi $code(q_0)$ sul nastro 3. 
 - posizione testina 1(del primo nastro) sul primo simbolo di $code(x)$, testina 2(del secondo nastro) sul primo simbolo di $code(\mathcal{M})$, testina 3(del terzo nastro) sul primo simbolo di $code(q_0)$.

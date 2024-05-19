@@ -46,6 +46,8 @@ $ETH = \{x \in \Sigma^* | x = code(\mathcal{M}) \text{ e } \mathcal{M} \text{ fe
         - su input $\epsilon$ scrive $x$ sul nastro e simula $\mathcal{M}$ su input $x$.
 - $\langle y, x \rangle \in HALT$ $\Leftrightarrow$ $y = code(\mathcal{M})$ e $\mathcal{M}$ ferma su input $x$ $\Leftrightarrow$ $\mathcal{M_{MX}}$ ferma su input $\epsilon$ $\Leftrightarrow$ $f(\langle y, x \rangle) = code(\mathcal{M_{MX}}) \text{ e } f(\langle y, x \rangle) \in ETH$.
 
+(In pratica $f$ trasforma una stringa vuota in un input per $HALT$)
+
 #### "Full Language" problem
 **Teorema:**
 $FL$ è non decidibile.
@@ -61,6 +63,8 @@ $FL = \{x \in \Sigma^* | x = code(\mathcal{M}) \text{ e } \mathcal{M} \text{ fer
         - $\mathcal{M_{MX}}$ cancella il suo input
         - scrive $x$ sul nastro e simula $\mathcal{M}$ su input $x$.
 - $\langle y, x \rangle \in HALT$ $\Leftrightarrow$ $y = code(\mathcal{M})$ e $\mathcal{M}$ ferma su input $x$ $\Leftrightarrow$ $\mathcal{M_{MX}}$ ferma su ogni input $\Leftrightarrow$ $f(\langle y, x \rangle) = code(\mathcal{M_{MX}}) \text{ e } f(\langle y, x \rangle) \in FL$.
+
+(In pratica $f$ trasforma un qualsiasi input in un input per $HALT$)
 
 #### Problema di equivalenza
 Il problema di equivalenza tra macchine di Turing.
@@ -78,6 +82,8 @@ $EQ = \{\langle y, x \rangle \in \Sigma^* \times \Sigma^* | x = code(\mathcal{M}
         - $\mathcal{M_{1}}$ esegue $\mathcal{M}$ sul suo input e restituisce 1 se $\mathcal{M}$ si ferma, va in loop altrimenti.
         - $\mathcal{M_{2}}$ restituisce sempre 1.
 - $z \in FL$ $\Leftrightarrow$ $z = code(\mathcal{M})$ e $\mathcal{M}$ ferma su ogni input $\Leftrightarrow$ $\mathcal{M_{1}}$ ferma su ogni input con output 1 $\Leftrightarrow$ $\mathcal{M_{1}}$ e $\mathcal{M_{2}}$ sono equivalenti $\Leftrightarrow$ $f(z) = \langle code(\mathcal{M_{1}}), code(\mathcal{M_{2}}) \rangle \text{ e } f(z) \in EQ$.
+
+(In pratica $\mathcal{M_{1}}$ prende in input $\mathcal{M}$ che si ferma su ogni input, quindi resituirà sempre 1, mentre $\mathcal{M_{2}}$ restituisce sempre 1, quindi sono equivalenti)
 
 ### Riduzione e Riconoscibilità
 Ciò che è vero per Riduzione e Decidibilità è vero anche per Riduzione e Riconoscibilità.
@@ -100,11 +106,13 @@ $EQ$ è non riconoscibile.
 **Dimostrazione:**
 - $HALT^- \leq EQ$ (sapendo che $HALT^-$ è non riconoscibile): costruiamo una funzione $f : \langle y, x \rangle \in HALT^- \rightarrow f(\langle y, x \rangle) \in EQ$, equivalente a $ \langle y, x \rangle \in HALT \rightarrow f(\langle y, x \rangle) \in EQ^-$.
 - Definiamo $f(\langle y, x \rangle)$ come segue:
-    - se $y \neq code(\mathcal{M})$ per ogni TM $\mathcal{M}$, allora prendiamo $\mathcal{M'}$ qualsiasi e consideriamo $f(\langle y, x \rangle) = \langle code(\mathcal{M'}), code(\mathcal{M'})$. Allora $f(\langle y, x \rangle) \in EQ$ e quindi $\langle y, x \rangle \notin EQ^-$.
+    - se $y \neq code(\mathcal{M})$ per ogni TM $\mathcal{M}$, allora prendiamo $\mathcal{M'}$ qualsiasi e consideriamo $f(\langle y, x \rangle) = \langle code(\mathcal{M'}), code(\mathcal{M'})\rangle$. Allora $f(\langle y, x \rangle) \in EQ$ e quindi $\langle y, x \rangle \notin EQ^-$. (Qui abbiamo già dimostrato che la prima parte della definizione di $HALT^-$ è riducibile a $EQ$)
     - se $y = code(\mathcal{M})$ e consideriamo $f(\langle y, x \rangle) = \langle code(\mathcal{M_1}), code(\mathcal{M_2}) \rangle$, dove $\mathcal{M_1}$ e $\mathcal{M_2}$ sono macchine di Turing che:
         - $\mathcal{M_1}$ esegue $\mathcal{M}$ sul suo input(x) e si femra se $\mathcal{M}$ si ferma, va in loop altrimenti.
         - $\mathcal{M_2}$ va in loop su ogni input.
 - $\langle y, x \rangle \in HALT$ $\Leftrightarrow$ $y = code(\mathcal{M})$ e $\mathcal{M}$ ferma su input $x$ $\Leftrightarrow$ $\mathcal{M_1}$ accetta una stringa $\Leftrightarrow$ $\mathcal{M_1}$ e $\mathcal{M_2}$ non sono equivalenti $\Leftrightarrow$ $f(\langle y, x \rangle) = \langle code(\mathcal{M_1}), code(\mathcal{M_2}) \rangle \text{ e } f(\langle y, x \rangle) \in EQ^-$.
+
+(In pratica se $\mathcal{M}$ si ferma su input $x$ allora il problema appartiene a $HALT$, però le due macchine $\mathcal{M_1}$ e $\mathcal{M_2}$ non sono equivalenti, quindi $HALT^- \leq EQ$)
 
 ### Riduzione e Decidibilità
 **Teorema:**
@@ -129,14 +137,16 @@ Quindi la Riduzione non è una relazione di equivalenza.
 $L_1 \leq L_2$ se e solo se $L_1^- \leq L_2^-$.
 
 **Dimostrazione:**
-- $\Rightarrow$: se $L_1 \leq L_2$, allora esiste una funzione $f$ tale che $x \in L_1 \Leftrightarrow f(x) \in L_2$. Quindi $x \in L_1^- \Leftrightarrow f(x) \in L_2^-$. Quindi $L_1^- \leq L_2^-$.
-- $\Leftarrow$: se $L_1^- \leq L_2^-$, allora esiste una funzione $f$ tale che $x \in L_1^- \Leftrightarrow f(x) \in L_2^-$. Quindi $x \in L_1 \Leftrightarrow f(x) \in L_2$. Quindi $L_1 \leq L_2$.
+- $\Rightarrow$: se $L_1 \leq L_2$, allora esiste una funzione $f$ tale che $x \in L_1 \Leftrightarrow f(x) \in L_2$. Quindi $x \notin L_1 \Leftrightarrow f(x) \notin L_2$. Quindi $x \in L_1^- \Leftrightarrow f(x) \in L_2^-$. Quindi $L_1^- \leq L_2^-$.
+- $\Leftarrow$: se $L_1^- \leq L_2^-$, allora esiste una funzione $f$ tale che $x \in L_1^- \Leftrightarrow f(x) \in L_2^-$. Quindi $x \notin L_1 \Leftrightarrow f(x) \notin L_2$. Quindi $x \in L_1 \Leftrightarrow f(x) \in L_2$. Quindi $L_1 \leq L_2$.
 
 **Corollario:**
 $L_1^- \leq L_2$ se e solo se $L_1 \leq L_2^-$(Usato implicitamente nella prova con $L_1 = HALT$ e $L_2 = EQ$).
 
 **Conclusioni:**
 Sappiamo quindi che $EQ^-$ è non riconoscibile. Infatti $HALT \leq FL \leq EQ$, quindi $HALT^- \leq EQ^-$(la non riconoscibilità di $HALT^-$ implica la non riconoscibilità di $EQ^-$).
+
+(Questo è fortissimo)
 
 **Gerarchia:**
 - $HALT$ è indecidibile, ma riconoscibile.

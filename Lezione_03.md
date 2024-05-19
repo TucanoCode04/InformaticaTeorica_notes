@@ -1,5 +1,5 @@
 ### Tesi di Church-Turing
-Se la soluzione di un problema può essere calcolata algorithmicamente, allora può essere calcolata da una macchina di Turing.
+Se la soluzione di un problema può essere calcolata algoritmicamente, allora può essere calcolata da una macchina di Turing.
 Non parla di efficienza o semplcitità, ma solo di calcolabilità.
 Tuttavia definiscono:
 - in modo rigoroso cos'è un algoritmo
@@ -8,7 +8,7 @@ Tuttavia definiscono:
 ### Variazioni della macchina di Turing
 La definizione della macchina di Turing è robusta(rimane invariata rispetto a variazioni).
 Sono state proposte variazioni della macchina di Turing, tutte equivalenti tra loro e alla macchina di Turing standard.
-#### Macchina di Turing con nastri addizionali:**
+#### Macchina di Turing con nastri addizionali:
 L'input viene letto dal primo nastro, gli altri nastir inizialmente vuoti.
 Ad ogni passo di computazione, ogni testina è nello stesso stato, ma può essere in posizioni diverse e leggere simboli o compiere azioni diverse.
 Se si raggiunge uno stato finale, l'output si legge dal primo nastro.

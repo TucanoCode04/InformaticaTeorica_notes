@@ -1,10 +1,12 @@
 ### Alan Turing
 - Che cos'è una computazione?
 - Cosa siginifica per un problema essere calcolabile?
+
 Osserviamo come gli umani risolvono problemi e cerchiamo di formalizzare il processo:
 - seguiamo un insieme di regole
 - leggiamo e scriviamo simboli
 - l'azione dipende dal simbolo letto
+
 Adesso astraiamo il processo.
 
 ### Macchina di Turing
@@ -45,7 +47,9 @@ Addizione unaria: $\sqcup 1 1 1 + 1 1 1 \sqcup$
 ### Espressività delle Macchine di Turing
 #### Problemi di decisione
 Input: dati del tipo corretto
+
 Output: si o no
+
 Una macchina di Turing calcola funzioni del tipo $\mathbb{N}^k \rightarrow \mathbb{N}$.
 Per rappresentare un problema di decisione basta codificare il problema come la funzione caratteristica di un linguaggio formale.
 
@@ -53,6 +57,7 @@ Per rappresentare un problema di decisione basta codificare il problema come la 
 *Esempio:* $\Sigma = \{1\}$, $L = \{\epsilon, 1, 11, 111, ...\}$
 La funzione caratteristica di un linguaggio formale è la funzione $\chi_L(x): \Sigma^* \rightarrow \{0, 1\}$ definita come:
 $\chi_L(x) = \begin{cases} 1 & \text{se } x \in L \\ 0 & \text{se } x \notin L \end{cases}$
+
 
 **Da un problema di decisione a un linguaggio formale**
 Il linguaggio formale associato a un problema di decisione è: $L = \{x \in \Sigma^* | x = code(\alpha)\}$ dove code codifica il dato di input $\alpha$.
