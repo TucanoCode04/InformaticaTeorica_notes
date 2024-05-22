@@ -76,6 +76,8 @@ La costruzione del grafo $G$ richiede tempo polinomiale rispetto alla dimensione
 Per la formula $F = (x_1 \lor x_1 \lor x_2) \land (\bar{x_1} \lor \bar{x_2} \lor \bar{x_2}) \land (\bar{x_1} \lor x_2 \lor x_2)$
 ![Grafo](image-10.png)
 
+(Per esempio un *clique* in questa immagine è formato dai nodi $x_2, \bar{x_1}, \bar{x_1}$, ed ha senso perchè se metti quelli veri, allora è soddisfacibile la formula $F$)
+
 ($\langle F \rangle \in 3SAT \rightarrow f(\langle F \rangle) \in CLIQUE$)
 - Se $F$ è soddisfacibile, almeno un letterale per clausola è vero, selezioniamo il nodo corrispondente nel grafo $G$ avendo così un nodo per tripla(ovvero un nodo per clausola). Questa selezione forma un clique di grandezza $k$, poichè ci sono $k$ triple e ogni nodo selezionato è collegato agli latri della selezione per costruzione.
 
@@ -109,7 +111,7 @@ Supponi che M sia la TM non deterministica che decide $L$. Dobbiamo tradurre una
 
 *Dimostrazione:*
 - Supponiamo che $M = \langle \Sigma, Q, q_0, \delta, \{Y, N\} \rangle$ decida $L$ in tempo $n^k$, per qualche $k$ costante.
-- Definiamo un *tableau* per $M$ come una tabella $n^k \times n^k$, dove ogni riga corrisponde ad una configurazione di $M$ in un passo della computazione su $w$ e ogni colonna corrisponde ad un passo della computazione.
+- Definiamo un *tableau* per $M$ come una tabella $n^k \times n^k$, dove ogni riga corrisponde ad una configurazione(stato corrente della macchina, simboli sul nastro e la posizione della testina) di $M$ in un passo della computazione su $w$ e ogni colonna rappresenta una posizione del nastro in quel passo. Le transizioni tra le righe seguono la funzione $\delta$.
 ![Tableau](image-11.png)
 
 Stabilire se $M$ accetta $w$ è equivalente a stabilire se esiste un tableau accettante per $M$ su $w$.
@@ -120,6 +122,8 @@ Stabilire se $M$ accetta $w$ è equivalente a stabilire se esiste un tableau acc
     - $F_{start}$: la prima riga corrisponde a una configurazione iniziale di $M$ su $w$
     - $F_{move}$: i simboli nelle celle devono descrivere una computazione legale di $M$ su $w$ che rispetti la funzione di transizione $\delta$
     - $F_{accept}$: almeno una delle configurazioni(righe) nel tableau è accettante(Y)
+
+(Per com'è costruita la formula se esiste un assegnamento che soddisfa $F_w$ allora esiste un tablueau accettante, quindi $M$ accetta $w$. Questo collega $SAT$ alla computazione di una macchina di Turing non-deterministica dimotrando così la $NP$-completezza)
 
 La computazione di una TM è locale, quindi è sufficiente esprimere una condizione che riguardi le *finestre* (di dimensione $2 \times 3$) del tableau.
 $$F_{cell} = \bigwedge_{1 \leq i, j \leq n^k} [\bigvee_{s \in C} x_{i, j, s}\land \bigwedge_{s, t \in C, s \neq t} (\neg x_{i, j, s} \lor \neg x_{i, j, t})]$$

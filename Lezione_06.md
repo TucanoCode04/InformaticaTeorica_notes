@@ -38,10 +38,10 @@ Il problema della fermata è riconoscibile ma non decidibile.
         - $\mathcal{M'}$ entra in un ciclo se $\mathcal{M_H}$ accetta.
     - Contraddizione: $\mathcal{M_H}$ accetta $\langle code(\mathcal{M'}), code(\mathcal{M'}) \rangle$ $\Rightarrow$ $\mathcal{M'}$ entra in un ciclo su input $code(\mathcal{M'})$ $\Rightarrow$ $\langle code(\mathcal{M'}), code(\mathcal{M'}) \rangle \notin HALT$ $\Rightarrow$ $\mathcal{M_H}$ rifiuta $\langle code(\mathcal{M'}), code(\mathcal{M'}) \rangle$.
 
-    ($\mathcal{M_H}$ accetta se e solo se $\mathcal{M}$ si ferma su input $x$, ma se $\mathcal{M_H}$ accetta allora $\mathcal{M'}$ entra in un ciclo, quindi $\mathcal{M_H}$ rifiuta, contraddizione.)
+    ($\mathcal{M_H}$ accetta se e solo se $\mathcal{M'}$ si ferma su input $x$, ma se $\mathcal{M_H}$ accetta allora $\mathcal{M'}$ entra in un ciclo, quindi $\mathcal{M_H}$ rifiuta, contraddizione.)
     - Proviamo al contrario: $\mathcal{M_H}$ rifiuta $\langle code(\mathcal{M'}), code(\mathcal{M'}) \rangle$ $\Rightarrow$ $\mathcal{M'}$ ferma su $code(\mathcal{M'})$ $\Rightarrow$ $\langle code(\mathcal{M'}), code(\mathcal{M'}) \rangle \in HALT$ $\Rightarrow$ $\mathcal{M_H}$ accetta $\langle code(\mathcal{M'}), code(\mathcal{M'}) \rangle$.
     
-    ($\mathcal{M_H}$ rifiuta se e solo se $\mathcal{M}$ non si ferma su input $x$, ma se $\mathcal{M_H}$ rifiuta allora $\mathcal{M'}$ ferma, quindi $\mathcal{M_H}$ accetta, contraddizione.)
+    ($\mathcal{M_H}$ rifiuta se e solo se $\mathcal{M'}$ non si ferma su input $x$, ma se $\mathcal{M_H}$ rifiuta allora $\mathcal{M'}$ ferma, quindi $\mathcal{M_H}$ accetta, contraddizione.)
 - L'unica assunzione utilizzata per costruire $\mathcal{M'}$ è che esista una macchina di Turing $\mathcal{M_H}$ che decide $HALT$. $\mathcal{M_H}$ non può esistere, quindi $HALT$ non è decidibile.
 
 

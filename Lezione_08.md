@@ -114,3 +114,5 @@ Contraddizione: $S$ è non numerabile.
 
 **Corollario:**
 L'insieme dei linguaggi non riconoscibili è non numerabile. Allora ci sono più linguaggi non riconoscibili che riconoscibili.
+
+

@@ -43,7 +43,7 @@ Ogni TM con un nastro può simulare in tempo $O(t^2(n))$ una con k nastri che la
 
 #### La classe EXP
 **Definizione:**
-$EXP$ è la classe dei linguaggi decidibili da una TM(deterministica, a un nastro) in tempo esponenziale. Ovvero: $$P = \bigcup_{k} TIME(2^{n^k})$$
+$EXP$ è la classe dei linguaggi decidibili da una TM(deterministica, a un nastro) in tempo esponenziale. Ovvero: $$EXP = \bigcup_{k} TIME(2^{n^k})$$
 
 ##### PATH
 $PATH = \{\langle G, s, t\rangle | \text{ G è un grafo diretto che ha un percorso diretto da s a t }\}$
@@ -72,7 +72,7 @@ Come sappiamo da prima, una qualsiasi codifica produrrà una stringa in tempo po
 #### Problemi in P
 - n è primo? In $P$
 - il grafo $G$ è connesso? In $P$
-- data un regex $r$ e la stringa $s$, £s£ è in $L(r)$? In $P$
+- data un regex $r$ e la stringa $s$, $s$ è in $L(r)$? In $P$
 - date regex $r, s$, $L(r) = L(s)$? In $PSPACE$
 - problema del commesso viaggiatore? In $NP$
 - dalla posizione $P$ in una partita di scacchi, quale giocatore ha una strategia vincente? In $PSPACE$
@@ -88,7 +88,8 @@ Dato un grafo indiretto, un *Clique* è un sotto-grafo dove tutti i nodi sono co
 **Problema:**
 $CLIQUE = \{\langle G, k \rangle\ | \text{ il grafo G contiene un clique di k nodi } \}$
 
-$CLIQUE$ è in $NP$. Questo è un algoritmo non-deterministico polinomiale che lo calcola, su input $\langle G, k \rangle\$:
+$CLIQUE$ è in $NP$. 
+Questo è un algoritmo non-deterministico polinomiale che lo calcola, su input $\langle G, k \rangle$:
 1. Seleziona non-deterministicamente un sottoinsieme $C$ di $k$ nodi di $G$.
 2. Verifica che $G$ colleghi tutti i nodi di $C$ tramite archi. Se sì, accetta. Altrimenti rigetta.
 
@@ -96,18 +97,20 @@ $CLIQUE$ è in $NP$. Questo è un algoritmo non-deterministico polinomiale che l
 Un linguaggio $A$ è *verificabile* se esiste una TM M(che termina sempre, ed accetta o rigetta) con la proprietà: $w \in A \Leftrightarrow \text { esiste una stringa c tale che M accetta } \langle w, c \rangle$
 Se M lavora in tempo polinomiale, diciamo che $A$ è *verificabile polinomialmente*.
 
+($w$ è la stringa di input, $c$ funge da certificato per $w$, nel senso che dimostra che $w$ appartiene al linguaggio, per esempio in $CLIQUE$: $w = \langle G, k \rangle$ e $c = \text{clique di k nodi in G}$)
+
 **Teorema:**
 Un linguaggio è in $NP$ se e solo se è verificabile polinomialmente.
 
 **Dimostrazione:**
 ($\Rightarrow$)
 Sia M una TM non-deterministica che decide un linguaggio $L$ in tempo polinomiale. Costruiamo un verifcatore $V$ polinomiale per $L$ nel seguente modo, su input $\langle w, c \rangle$:
-1. Simula M su $w$, $c$ saranno le scelte non-deterministiche da prendere nell'albero di computazione codificate.
-2. Se il ramo di computazione è accettante, accetta.
+1. Simula M su $\langle w, c \rangle$, dove $c$ saranno le scelte non-deterministiche da prendere nell'albero di computazione codificate.
+2. Se il ramo di computazione scelto da $c$ è accettante, accetta.
 
 ($\Leftarrow$)
 Sia $V$ un verificatore polinomiale per $L$. Cortuiamo una TM M non-deterministica che decide $L$ nel seguente modo, su input $w$ di lungezza $n$:
-1. Seleziona non-deterministicamente una stringa $c$ di lunghezza al più $n^k$.
+1. Seleziona non-deterministicamente una stringa $c$ di lunghezza al più $n^k$(lunghezza di $w$).
 2. Simula $V$ su input $\langle w, c \rangle$.
 3. Se $V$ accetta, accetta. Se no, rigetta.
 
